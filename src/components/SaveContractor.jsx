@@ -10,6 +10,12 @@ export default function SaveContractor() {
   const [error, setError] = useState([]);
   const [hideErr, setHideErr] = useState(true);
 
+  // const submitData = () => {
+  //   const formData = new FormData();
+  //   formData.append("firstname", firstname);
+  //   formData.append("surname", surname);
+  // };
+
   function validForm(err) {
     if (err.res) {
       alert("Sukces");
@@ -36,7 +42,8 @@ export default function SaveContractor() {
         method="POST"
         onSubmit={(e) => {
           validForm(error);
-
+          // console.log(e.target[0].value);
+          // submitData(e)
           e.preventDefault();
         }}
       >
