@@ -1,56 +1,75 @@
 import { useState } from "react";
-import { Form, Input } from "./form.style";
+import { ErrorContext } from "../context/errorContext";
+import { Button, Error, Form, Input, Row } from "./form.style";
+import ImageForm from "./imageForm";
+import Nip from "./nip";
 import Pesel from "./pesel";
 
 export default function SaveContractor() {
   const [type, setType] = useState(true);
+  const [error, setError] = useState([]);
+  const [hideErr, setHideErr] = useState(true);
+
+  function validForm(err) {
+    if (err.res) {
+      alert("Sukces");
+    } else {
+      setHideErr(false);
+      setTimeout(() => {
+        setHideErr(true);
+      }, 3500);
+    }
+  }
 
   return (
-    <>
-      <h2>Nowy kontrahent</h2>
+    <ErrorContext.Provider value={{ error, setError }}>
+      <Row>
+        <h2>Nowy kontrahent</h2>
+      </Row>
+      {hideErr ? null : (
+        <Error>
+          <h2>{error.msg}</h2>
+        </Error>
+      )}
       <Form
         action="Contractor/Save"
         method="POST"
         onSubmit={(e) => {
+          validForm(error);
+
           e.preventDefault();
         }}
       >
-        <Input type="text" placeholder="imie" />
-        <Input type="text" placeholder="nazwisko" />
-        <div>
+        <Row>
+          <Input type="text" placeholder="Imie" name="firstname" required />
+          <Input type="text" placeholder="nazwisko" name="surname" required />
+        </Row>
+        <Row>
           <label>
             <Input
               type="radio"
               name="typ"
-              id=""
               defaultChecked
               onChange={() => setType(!type)}
             />
             Osoba
           </label>
           <label>
-            <Input
-              type="radio"
-              name="typ"
-              id=""
-              onChange={() => setType(!type)}
-            />
+            <Input type="radio" name="typ" onChange={() => setType(!type)} />
             Firma
           </label>
-        </div>
+        </Row>
 
-        <div>
-          {type ? (
-            <Pesel />
-          ) : (
-            <Input type="text" name="" id="" placeholder="NIP" />
-          )}
-        </div>
+        <Row>{type ? <Pesel /> : <Nip />}</Row>
 
-        <Input type="file" accept="image/jpg, image/jpeg" />
+        <Row>
+          <ImageForm />
+        </Row>
 
-        <Input type="submit" value="Send" />
+        <Row>
+          <Button disabled={!hideErr}>Wyślij</Button>
+        </Row>
       </Form>
-    </>
+    </ErrorContext.Provider>
   );
 }
