@@ -33,6 +33,7 @@ export default function ImageForm() {
   return (
     <>
       <InputFile
+        required
         type="file"
         accept="image/jpeg"
         onChange={(e) => {
@@ -47,7 +48,6 @@ export default function ImageForm() {
           width="64"
           height="64"
           onClick={() => setPreview(!preview)}
-          required
         />
       )}
       {preview && (
