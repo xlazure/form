@@ -42,7 +42,7 @@ export default function Nip(props) {
     } else {
       setError(isValidNip(nip));
     }
-  }, [nip]);
+  }, [nip, setError]);
 
   return (
     <Input

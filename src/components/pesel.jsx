@@ -39,7 +39,7 @@ export default function Pesel() {
     } else {
       setError(isValidPesel(pesel));
     }
-  }, [pesel]);
+  }, [pesel, setError]);
   return (
     <Input
       type="text"
