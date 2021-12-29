@@ -2,7 +2,7 @@
 
 ## Podglad strony na hostingu
 
-[Strona]()
+[Strona](https://dreamy-morse-5412ae.netlify.app/)
 
 ## Instalacja
 
