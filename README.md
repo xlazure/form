@@ -1,6 +1,6 @@
 # Zadanie rekrutacyjne - Formularz dodawania kontrahenta
 
-Aplikacja, może nie działać na telefon, podwzględem walidacji formularza
+Aplikacja, może nie działać na telefon, pod względem walidacji formularza
 
 ## Podglad strony na hostingu
 
